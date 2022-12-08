@@ -1,9 +1,15 @@
 import React,{useRef} from 'react'
-import { Container, Form, Button, Card} from 'react-bootstrap'
+import {  Form, Button, Card} from 'react-bootstrap'
+import { AuthActions } from '../../Store/Auth-Slice';
+import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 function LogIn() {
     const userInputEmail = useRef();
     const userInputPassword = useRef();
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const FormSubmitHandler = (e) => {
         e.preventDefault();
@@ -35,6 +41,12 @@ function LogIn() {
                     }
                 })
             }
+        }).then((data)=>{
+            console.log(data);
+            dispatch(AuthActions.LogIn(data.idToken));
+            localStorage.setItem('ChatEmail', data.email);
+            navigate('/welcomepage');
+
         }).catch((err)=>{
             console.log(err);
         })
