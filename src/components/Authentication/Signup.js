@@ -38,6 +38,7 @@ function Signup() {
             console.log(err);
         })
     }
+    
   return (
     <Card border="success" className='shadow-lg' style={{ width: '38rem'}}>
         <Card.Body>
