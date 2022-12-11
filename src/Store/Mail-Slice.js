@@ -13,12 +13,14 @@ const MailSlice = createSlice({
     name:'mail',
     initialState:{
         TotalMails,
-        composeMail:false
+        composeMail:false,
+        selectedMailDetails:null
     },
     reducers : {
         replaceMailList : (state, action) => {
             state.TotalMails = action.payload.TotalMails;
-            state.composeMail = action.payload.composeMail
+            state.composeMail = action.payload.composeMail;
+            state.selectedMailDetails = action.payload.selectedMailDetails;
         },
 
         addMail : (state, action) => {
@@ -32,6 +34,10 @@ const MailSlice = createSlice({
 
         closeCompose : (state) => {
             state.composeMail = false;
+        },
+
+        mailDetails : (state, action) => {
+            state.selectedMailDetails = action.payload;
         }
     }
 });

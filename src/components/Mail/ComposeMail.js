@@ -19,6 +19,21 @@ function ComposeMail(props) {
     const [subjectMail, setSubjectMail] = useState('');
     const [textMail, setTextMail] = useState('');
 
+    let updateDate = new Date();
+    let date = new Date();
+
+    let convertedTime = date.toLocaleString ('en-US', {
+        day:    '2-digit',
+        month:  '2-digit',
+        year:   'numeric',
+        hour:   'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+    }
+) ;
+    
+
     const FormSubmitHandler = (e) => {
         e.preventDefault();
 
@@ -29,7 +44,7 @@ function ComposeMail(props) {
                 To:toMail,
                 Subject:subjectMail,
                 Text:textMail,
-                Timestamp:String(new Date())
+                Timestamp:String(convertedTime)
             }
 
             dispatch(MailActions.addMail(Data));

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Container, Table,Badge} from 'react-bootstrap'
+import {Card, Container, Table, Badge} from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import NavBar from '../Navigation/NavBar'
 import SideBar from '../Ui/SideBar'
@@ -12,7 +12,7 @@ import {MdMailOutline} from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { MailActions } from '../../Store/Mail-Slice'
 
-function MailList(props) {
+function InboxMail(props) {
   const {TotalMails} = useSelector(state => state.Mail);
 
   const dispatch  = useDispatch();
@@ -32,16 +32,10 @@ function MailList(props) {
       </Card.Header>
       <Card.Body>
         {TotalMails.map((data)=>(
-        <Link to={`/sendmail/${data.id}`} style={{textDecoration:'none',color:'black'}}><Table onClick={()=>dispatch(MailActions.mailDetails({
-          id:data.id,
-          To:data.To,
-          Subject:data.Subject,
-          Text:data.Text,
-          Timestamp:data.Timestamp
-        }))}>
-            <tr style={{borderBottom:'1px solid grey',cursor:'pointer',padding:'10px'}} key={data.id}>
+        <Link to={`/inboxmail/${data.id}`} style={{textDecoration:'none',color:'black'}}><Table>
+            <tr style={{borderBottom:'1px solid grey',cursor:'pointer'}} key={data.id}>
                 <HiUserCircle style={{width:'30px',height:'30px'}}/>
-                <td>To : <Badge pill bg="secondary">{data.To}</Badge></td>
+                <td>From : <Badge pill bg="secondary"> {data.To}</Badge></td>
                 <div style={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',width:'350px', textAlign:'center',borderBottom:'none'}}>
                 <td><b>{data.Subject}</b>{data.Text}</td>
                 </div>
@@ -55,4 +49,4 @@ function MailList(props) {
   )
 }
 
-export default MailList
+export default InboxMail
