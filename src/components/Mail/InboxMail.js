@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Container, Table, Badge} from 'react-bootstrap'
+import {Card, Table, Badge} from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import NavBar from '../Navigation/NavBar'
 import SideBar from '../Ui/SideBar'
@@ -8,20 +8,24 @@ import SideBar from '../Ui/SideBar'
 import {CgSelectR} from 'react-icons/cg'
 import {HiOutlineRefresh,HiUserCircle} from 'react-icons/hi'
 import {FiMoreVertical, FiChevronLeft, FiChevronRight} from 'react-icons/fi'
-import {MdMailOutline} from 'react-icons/md'
+import {FaCircle} from 'react-icons/fa'
+
 import { Link } from 'react-router-dom'
 import { MailActions } from '../../Store/Mail-Slice'
 
 function InboxMail(props) {
   const {TotalMails} = useSelector(state => state.Mail);
 
+  const showDot = useSelector(state => state.Mail.displayInboxDot);
+
   const dispatch  = useDispatch();
+
   
   return (
     <div>
       <NavBar/>
       <SideBar/>
-    <Card style={{height:'600px', width:'1200px',marginLeft:'150px'}}>
+    <Card style={{height:'600px', width:'1200px',marginLeft:'150px',overflowY:'auto'}}>
       <Card.Header>
         <div style={{float:'left'}}>
             <CgSelectR style={{marginLeft:'15px',cursor:'pointer'}}/><HiOutlineRefresh style={{marginLeft:'15px',cursor:'pointer'}}/><FiMoreVertical style={{marginLeft:'15px',cursor:'pointer'}}/>
@@ -32,10 +36,18 @@ function InboxMail(props) {
       </Card.Header>
       <Card.Body>
         {TotalMails.map((data)=>(
-        <Link to={`/inboxmail/${data.id}`} style={{textDecoration:'none',color:'black'}}><Table>
+        <Link to={`/inboxmail/${data.id}`} style={{textDecoration:'none',color:'black'}}><Table onClick={()=>{ dispatch(MailActions.mailDetails({
+            id:data.id,
+            To:data.To,
+            Subject:data.Subject,
+            Text:data.Text,
+            Timestamp:data.Timestamp
+          }));
+          dispatch(MailActions.hideInboxDot());
+          }}>
+            {showDot && <FaCircle style={{width:'20px',height:'20px',color:'#05386B'}} />}
             <tr style={{borderBottom:'1px solid grey',cursor:'pointer'}} key={data.id}>
-                <HiUserCircle style={{width:'30px',height:'30px'}}/>
-                <td>From : <Badge pill bg="secondary"> {data.To}</Badge></td>
+                <td>From : <Badge pill bg="secondary"><HiUserCircle style={{width:'30px',height:'30px'}}/> {data.To}</Badge></td>
                 <div style={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',width:'350px', textAlign:'center',borderBottom:'none'}}>
                 <td><b>{data.Subject}</b>{data.Text}</td>
                 </div>

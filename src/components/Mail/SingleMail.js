@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Card, Container } from 'react-bootstrap'
 import NavBar from '../Navigation/NavBar'
 import SideBar from '../Ui/SideBar'
 import SingleMailIcons from '../Ui/SingleMailIcons'
-import { useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { MailActions } from '../../Store/Mail-Slice'
+import { useSelector } from 'react-redux'
+
 
 
 function SingleMail() {

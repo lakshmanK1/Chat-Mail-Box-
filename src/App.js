@@ -7,6 +7,7 @@ import {SendMailData, FetchMailsData} from './Store/Mail-Actions'
 import MailList from "./components/Mail/MailList";
 import SingleMail from "./components/Mail/SingleMail";
 import InboxMail from "./components/Mail/InboxMail";
+import InboxSingleMail from "./components/Mail/InboxSingleMail";
 
 let isInitial = true;
 function App() {
@@ -38,6 +39,7 @@ function App() {
        <Route exact path="/sendmailsbox" element={<MailList/>}/>
        <Route exact path="/sendmail/:id" element={<SingleMail/>}/>
        <Route exact path="/inboxmail" element={<InboxMail/>}/>
+       <Route exact path="/inboxmail/:id" element={<InboxSingleMail/>}/>
       </Routes>
     </div>
   );

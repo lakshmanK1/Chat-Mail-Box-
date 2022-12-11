@@ -50,6 +50,7 @@ function ComposeMail(props) {
             dispatch(MailActions.addMail(Data));
             
             alert('Email successfully send..');
+            dispatch(MailActions.showInboxDot());
             dispatch(MailActions.closeCompose());
         }
     }

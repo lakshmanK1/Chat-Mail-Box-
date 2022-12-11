@@ -9,12 +9,12 @@ import {AiFillFolderAdd,AiOutlineMore,AiFillPrinter} from 'react-icons/ai'
 import {RxOpenInNewWindow} from 'react-icons/rx'
 
 
-function SingleMailIcons(props) {
+function InboxSingleMailIcons(props) {
    
   return (
     <div>
         <div style={{float:'left'}}>
-            <Link to='/sendmailsbox'><BsArrowLeft style={{width:'20px',height:'20px',marginLeft:'10px',cursor:'pointer',color:'grey'}} onClick={props.onHide}/></Link>
+            <Link to='/inboxmail'><BsArrowLeft style={{width:'20px',height:'20px',marginLeft:'10px',cursor:'pointer',color:'grey'}} onClick={props.onHide}/></Link>
             <RiInboxArchiveFill style={{width:'20px',height:'20px',marginLeft:'10px',cursor:'pointer',color:'grey'}}/>
             <RiSpamFill style={{width:'20px',height:'20px',marginLeft:'10px',cursor:'pointer',color:'grey'}}/>
             <MdOutlineSnooze style={{width:'20px',height:'20px',marginLeft:'10px',cursor:'pointer',color:'grey'}}/>
@@ -32,4 +32,4 @@ function SingleMailIcons(props) {
   )
 }
 
-export default SingleMailIcons
+export default InboxSingleMailIcons

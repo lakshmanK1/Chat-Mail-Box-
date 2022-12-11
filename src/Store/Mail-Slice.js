@@ -14,7 +14,8 @@ const MailSlice = createSlice({
     initialState:{
         TotalMails,
         composeMail:false,
-        selectedMailDetails:null
+        selectedMailDetails:null,
+        displayInboxDot:false,
     },
     reducers : {
         replaceMailList : (state, action) => {
@@ -38,6 +39,14 @@ const MailSlice = createSlice({
 
         mailDetails : (state, action) => {
             state.selectedMailDetails = action.payload;
+        },
+
+        showInboxDot : (state) => {
+            state.displayInboxDot = true;
+        },
+
+        hideInboxDot : (state) => {
+            state.displayInboxDot = false;
         }
     }
 });
