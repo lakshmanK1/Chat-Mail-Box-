@@ -29,6 +29,10 @@ const MailSlice = createSlice({
             state.TotalMails = [newData, ...state.TotalMails];
         },
 
+        deleteMail : (state, action) => {
+            state.TotalMails = state.TotalMails.filter((mail) => mail.id !== action.payload);
+        },
+
         openCompose : (state) => {
             state.composeMail = true;
         },

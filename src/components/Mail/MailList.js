@@ -3,12 +3,13 @@ import {Card, Container, Table,Badge} from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import NavBar from '../Navigation/NavBar'
 import SideBar from '../Ui/SideBar'
+import { DeleteMailData } from '../../Store/Mail-Actions'
 
 //icons
 import {CgSelectR} from 'react-icons/cg'
 import {HiOutlineRefresh,HiUserCircle} from 'react-icons/hi'
 import {FiMoreVertical, FiChevronLeft, FiChevronRight} from 'react-icons/fi'
-import {MdMailOutline} from 'react-icons/md'
+import {AiTwotoneDelete} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { MailActions } from '../../Store/Mail-Slice'
 
@@ -16,6 +17,10 @@ function MailList(props) {
   const {TotalMails} = useSelector(state => state.Mail);
 
   const dispatch  = useDispatch();
+
+  const deleteEmail = (mailDetails) => {
+    dispatch(DeleteMailData(mailDetails));
+  }
   
   return (
     <div>
@@ -45,6 +50,7 @@ function MailList(props) {
                 <td><b>{data.Subject}</b>{data.Text}</td>
                 </div>
                 <td>{data.Timestamp}</td>
+                <td><AiTwotoneDelete style={{width:'35px',height:'35px',color:'red',marginLeft:'10px'}} onClick={deleteEmail(data)}/></td>
             </tr>
         </Table></Link>
          ))}

@@ -13,7 +13,7 @@ const AuthSlice = createSlice({
             localStorage.setItem('ChatAppToken', state.token);
         },
 
-        LogOut : (state, action) => {
+        LogOut : (state) => {
             state.isLoggedIn = false;
             state.token = null;
             localStorage.removeItem('ChatAppToken');
