@@ -28,6 +28,7 @@ const MailSlice = createSlice({
         TotalMails,
         composeMail:false,
         selectedMailDetails:null,
+        unreadMailCount : 0
     },
     reducers : {
         replaceMailList : (state, action) => {
@@ -39,6 +40,8 @@ const MailSlice = createSlice({
         addMail : (state, action) => {
             const newData = {...action.payload, ReadMail:false};
             state.TotalMails = [newData, ...state.TotalMails];
+
+            state.unreadMailCount = state.unreadMailCount + 1;
         },
 
         deleteMail : (state, action) => {
@@ -67,6 +70,8 @@ const MailSlice = createSlice({
             const indexNum = state.TotalMails.findIndex((item) => item.id === action.payload.id);
 
             state.TotalMails[indexNum].ReadMail = action.payload.ReadMail; 
+
+            state.unreadMailCount = state.unreadMailCount - 1;
         }
     }
 });

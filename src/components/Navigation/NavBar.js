@@ -5,9 +5,12 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {SiGmail} from 'react-icons/si'
 
+
 function NavBar() {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(state => state.Authen.isLoggedIn);
+
+
     const navigate = useNavigate();
 
     const LogoutHandler = () => {
