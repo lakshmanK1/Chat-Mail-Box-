@@ -41,11 +41,12 @@ function InboxMail(props) {
             To:data.To,
             Subject:data.Subject,
             Text:data.Text,
-            Timestamp:data.Timestamp
+            Timestamp:data.Timestamp,
+            ReadMail:data.ReadMail
           }));
-          dispatch(MailActions.hideInboxDot());
+          dispatch(MailActions.hideInboxDot({id:data.id, ReadMail:false}));
           }}>
-            {showDot && <FaCircle style={{width:'20px',height:'20px',color:'#05386B'}} />}
+            {data.ReadMail && <FaCircle style={{width:'20px',height:'20px',color:'#05386B'}} />}
             <tr style={{borderBottom:'1px solid grey',cursor:'pointer'}} key={data.id}>
                 <td>From : <Badge pill bg="secondary"><HiUserCircle style={{width:'30px',height:'30px'}}/> {data.To}</Badge></td>
                 <div style={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',width:'350px', textAlign:'center',borderBottom:'none'}}>

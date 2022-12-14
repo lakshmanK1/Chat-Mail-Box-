@@ -13,7 +13,7 @@ import {AiTwotoneDelete} from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { MailActions } from '../../Store/Mail-Slice'
 
-function MailList(props) {
+function MailList() {
   const {TotalMails} = useSelector(state => state.Mail);
 
   const dispatch  = useDispatch();
@@ -50,7 +50,7 @@ function MailList(props) {
                 <td><b>{data.Subject}</b>{data.Text}</td>
                 </div>
                 <td>{data.Timestamp}</td>
-                <td><AiTwotoneDelete style={{width:'35px',height:'35px',color:'red',marginLeft:'10px'}} onClick={deleteEmail(data)}/></td>
+                <td><AiTwotoneDelete style={{width:'35px',height:'35px',color:'red',marginLeft:'10px'}} onClick={()=>deleteEmail(data)}/></td>
             </tr>
         </Table></Link>
          ))}

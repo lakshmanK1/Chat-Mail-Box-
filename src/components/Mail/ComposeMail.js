@@ -3,6 +3,7 @@ import {Button, Card, Form, InputGroup} from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { MailActions } from '../../Store/Mail-Slice'
 import {SendMailData} from '../../Store/Mail-Actions'
+import {v4 as uuidv4} from 'uuid'
 
 //icons
 import {MdMinimize, MdTextFormat, MdAttachFile, MdOutlineInsertLink,MdAddToDrive, MdOutlineImage} from 'react-icons/md'
@@ -19,7 +20,6 @@ function ComposeMail(props) {
     const [subjectMail, setSubjectMail] = useState('');
     const [textMail, setTextMail] = useState('');
 
-    let updateDate = new Date();
     let date = new Date();
 
     let convertedTime = date.toLocaleString ('en-US', {
@@ -41,6 +41,7 @@ function ComposeMail(props) {
             alert("please fill all the required fields");
         }else {
             let Data = {
+                id:uuidv4(),
                 To:toMail,
                 Subject:subjectMail,
                 Text:textMail,
@@ -50,7 +51,7 @@ function ComposeMail(props) {
             dispatch(MailActions.addMail(Data));
             
             alert('Email successfully send..');
-            dispatch(MailActions.showInboxDot());
+            dispatch(MailActions.showInboxDot({id:Data.id, ReadMail:true}));
             dispatch(MailActions.closeCompose());
         }
     }

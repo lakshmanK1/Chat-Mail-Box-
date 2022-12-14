@@ -1,12 +1,25 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {v4 as uuidv4} from 'uuid'
+
+let date = new Date();
+
+    let convertedTime = date.toLocaleString ('en-US', {
+        day:    '2-digit',
+        month:  '2-digit',
+        year:   'numeric',
+        hour:   'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+    }
+) ;
 
 const TotalMails = [{
     id:1,
     To:'ganesh1@gmail.com',
     Subject:'I want Leave',
     Text:'Hi, iam unable to come office today due to fever.',
-    Timestamp:String(new Date())
+    Timestamp:String(convertedTime),
+    ReadMail:false
 }];
 
 const MailSlice = createSlice({
@@ -15,7 +28,6 @@ const MailSlice = createSlice({
         TotalMails,
         composeMail:false,
         selectedMailDetails:null,
-        displayInboxDot:false,
     },
     reducers : {
         replaceMailList : (state, action) => {
@@ -25,7 +37,7 @@ const MailSlice = createSlice({
         },
 
         addMail : (state, action) => {
-            const newData = {...action.payload, id:uuidv4()};
+            const newData = {...action.payload, ReadMail:false};
             state.TotalMails = [newData, ...state.TotalMails];
         },
 
@@ -45,12 +57,16 @@ const MailSlice = createSlice({
             state.selectedMailDetails = action.payload;
         },
 
-        showInboxDot : (state) => {
-            state.displayInboxDot = true;
+        showInboxDot : (state,action) => {
+            const index = state.TotalMails.findIndex((item) => item.id === action.payload.id);
+
+            state.TotalMails[index].ReadMail = action.payload.ReadMail; 
         },
 
-        hideInboxDot : (state) => {
-            state.displayInboxDot = false;
+        hideInboxDot : (state, action) => {
+            const indexNum = state.TotalMails.findIndex((item) => item.id === action.payload.id);
+
+            state.TotalMails[indexNum].ReadMail = action.payload.ReadMail; 
         }
     }
 });

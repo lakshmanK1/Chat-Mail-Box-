@@ -1,11 +1,12 @@
 import { MailActions } from "./Mail-Slice";
 
-const enteredEmail = localStorage.getItem('ChatEmail');
+
 
 export const FetchMailsData = () => {
+    const enteredEmail = localStorage.getItem('ChatEmail').replace('@','').replace('.','');
     return async(dispatch)=>{
         const FetchData = async () => {
-            const response = await fetch(`https://chat-app-c6b5f-default-rtdb.firebaseio.com/MailStore/${enteredEmail}.json`);
+            const response = await fetch(`https://chat-mail-box-default-rtdb.firebaseio.com/MailStore/${enteredEmail}.json`);
 
             if(!response.ok){
                 throw new Error('Fetching data is failed');
@@ -25,9 +26,10 @@ export const FetchMailsData = () => {
 }
 
 export const SendMailData = (MailData) => {
+    const enteredEmail = localStorage.getItem('ChatEmail').replace('@','').replace('.','');
     return async() => {
         const postMailDetails = async() => {
-            const response = await fetch(`https://chat-app-c6b5f-default-rtdb.firebaseio.com/MailStore/${enteredEmail}.json`,{
+            const response = await fetch(`https://chat-mail-box-default-rtdb.firebaseio.com/MailStore/${enteredEmail}.json`,{
                 method:"PUT",
                 body:JSON.stringify(MailData)
             });
@@ -46,16 +48,17 @@ export const SendMailData = (MailData) => {
 
 
 export const DeleteMailData = (mail) => {
+    const enteredEmail = localStorage.getItem('ChatEmail').replace('@','').replace('.','');
         return async(dispatch) => {
             const deleteMail = async () => {
-                const response = await fetch(`https://chat-app-c6b5f-default-rtdb.firebaseio.com/MailStore/${enteredEmail}/${mail.id}.json`,{
+                const response = await fetch(`https://chat-mail-box-default-rtdb.firebaseio.com/MailStore/${enteredEmail}/${mail.id}.json`,{
                     method:'DELETE',
                 });
     
                 const data = await response.json();
     
                 if(response.ok){
-                    dispatch(MailActions.deleteMail(mail));
+                    dispatch(MailActions.deleteMail(mail.id));
                 }else {
                     throw data.error;
                 }
